@@ -12,13 +12,12 @@ $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden s
  
 if(isset($_GET['register'])) {
 	$error = false;
-	$vorname = trim($_POST['vorname']);
-	$nachname = trim($_POST['nachname']);
+	$username = trim($_POST['username']);
 	$email = trim($_POST['email']);
 	$passwort = $_POST['passwort'];
 	$passwort2 = $_POST['passwort2'];
 	
-	if(empty($vorname) || empty($nachname) || empty($email)) {
+	if(empty($username) || empty($email)) {
 		echo 'Bitte alle Felder ausfüllen<br>';
 		$error = true;
 	}
@@ -52,8 +51,8 @@ if(isset($_GET['register'])) {
 	if(!$error) {	
 		$passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
 		
-		$statement = $pdo->prepare("INSERT INTO users (email, passwort, vorname, nachname) VALUES (:email, :passwort, :vorname, :nachname)");
-		$result = $statement->execute(array('email' => $email, 'passwort' => $passwort_hash, 'vorname' => $vorname, 'nachname' => $nachname));
+		$statement = $pdo->prepare("INSERT INTO users (email, passwort, username) VALUES (:email, :passwort, :username)");
+		$result = $statement->execute(array('email' => $email, 'passwort' => $passwort_hash, 'username' => $username));
 		
 		if($result) {		
 			echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
@@ -70,13 +69,8 @@ if($showFormular) {
 <form action="?register=1" method="post">
 
 <div class="form-group">
-<label for="inputVorname">Vorname:</label>
-<input type="text" id="inputVorname" size="40" maxlength="250" name="vorname" class="form-control" required>
-</div>
-
-<div class="form-group">
-<label for="inputNachname">Nachname:</label>
-<input type="text" id="inputNachname" size="40" maxlength="250" name="nachname" class="form-control" required>
+<label for="inputUsername">Username:</label>
+<input type="text" id="inputUsername" size="40" maxlength="250" name="username" class="form-control" required>
 </div>
 
 <div class="form-group">

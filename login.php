@@ -4,12 +4,12 @@ require_once("inc/config.inc.php");
 require_once("inc/functions.inc.php");
 
 $error_msg = "";
-if(isset($_POST['email']) && isset($_POST['passwort'])) {
-	$email = $_POST['email'];
+if(isset($_POST['emailusername']) && isset($_POST['passwort'])) {
+	$emailusername = $_POST['emailusername'];
 	$passwort = $_POST['passwort'];
 
-	$statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-	$result = $statement->execute(array('email' => $email));
+	$statement = $pdo->prepare("SELECT * FROM users WHERE email = :emailusername OR username = :emailusername");
+	$result = $statement->execute(array('emailusername' => $emailusername));
 	$user = $statement->fetch();
 
 	//Überprüfung des Passworts
@@ -51,7 +51,7 @@ if(isset($error_msg) && !empty($error_msg)) {
 }
 ?>
 	<label for="inputEmail" class="sr-only">E-Mail</label>
-	<input type="email" name="email" id="inputEmail" class="form-control" placeholder="E-Mail" value="<?php echo $email_value; ?>" required autofocus>
+	<input type="text" name="emailusername" id="inputEmail" class="form-control" placeholder="E-Mail" value="<?php echo $email_value; ?>" required autofocus>
 	<label for="inputPassword" class="sr-only">Passwort</label>
 	<input type="password" name="passwort" id="inputPassword" class="form-control" placeholder="Passwort" required>
 	<div class="checkbox">

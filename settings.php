@@ -13,14 +13,13 @@ if(isset($_GET['save'])) {
 	$save = $_GET['save'];
 	
 	if($save == 'personal_data') {
-		$vorname = trim($_POST['vorname']);
-		$nachname = trim($_POST['nachname']);
+		$username = trim($_POST['username']);
 		
-		if($vorname == "" || $nachname == "") {
-			$error_msg = "Bitte Vor- und Nachname ausfüllen.";
+		if($vorname == "") {
+			$error_msg = "Bitte Username ausfüllen.";
 		} else {
-			$statement = $pdo->prepare("UPDATE users SET vorname = :vorname, nachname = :nachname, updated_at=NOW() WHERE id = :userid");
-			$result = $statement->execute(array('vorname' => $vorname, 'nachname'=> $nachname, 'userid' => $user['id'] ));
+			$statement = $pdo->prepare("UPDATE users SET username = :username, updated_at=NOW() WHERE id = :userid");
+			$result = $statement->execute(array('username' => $username,'userid' => $user['id'] ));
 			
 			$success_msg = "Daten erfolgreich gespeichert.";
 		}
@@ -110,18 +109,12 @@ endif;
     	<br>
     	<form action="?save=personal_data" method="post" class="form-horizontal">
     		<div class="form-group">
-    			<label for="inputVorname" class="col-sm-2 control-label">Vorname</label>
+    			<label for="inputUsername" class="col-sm-2 control-label">Vorname</label>
     			<div class="col-sm-10">
-    				<input class="form-control" id="inputVorname" name="vorname" type="text" value="<?php echo htmlentities($user['vorname']); ?>" required>
+    				<input class="form-control" id="inputUsername" name="username" type="text" value="<?php echo htmlentities($user['username']); ?>" required>
     			</div>
     		</div>
     		
-    		<div class="form-group">
-    			<label for="inputNachname" class="col-sm-2 control-label">Nachname</label>
-    			<div class="col-sm-10">
-    				<input class="form-control" id="inputNachname" name="nachname" type="text" value="<?php echo htmlentities($user['nachname']); ?>" required>
-    			</div>
-    		</div>
     		
     		<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">

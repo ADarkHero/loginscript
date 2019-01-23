@@ -35,11 +35,16 @@
 					<tr>
 						<td>							
 							<div class="input-group">
-								<div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-								<input class="form-control" placeholder="E-Mail" name="email" type="email" required>								
+								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+								<input class="form-control" placeholder="E-Mail" name="emailusername" type="text" required>								
 							</div>
 						</td>
-						<td><input class="form-control" placeholder="Passwort" name="passwort" type="password" value="" required></td>
+						<td>
+							<div class="input-group">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+								<input class="form-control" placeholder="Passwort" name="passwort" type="password" value="" required>							
+							</div>
+						</td>
 						<td><button type="submit" class="btn btn-success">Login</button></td>
 					</tr>
 					<tr>
