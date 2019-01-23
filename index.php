@@ -13,14 +13,11 @@ include("templates/header.inc.php")
     <div class="jumbotron">
       <div class="container">
         <h1>Loginscript</h1>
-        <p>Herzlich Willkommen zum Loginscript von PHP-Einfach.de. Details zu diesem Script sowie eine Schritt-für-Schritt Anleitung findet ihr auf <a href="http://www.php-einfach.de/experte/php-codebeispiele/loginscript/" target="_blank">PHP-Einfach.de &raquo; Loginscript</a>.
-        
-        Das Design wurde mittels <a href="http://getbootstrap.com" target="_blank">Bootstrap v3.3.6</a> erstellt.<br><br>
-        
-        Dieser Code ist unter der GPLv3 lizenziert. Ihr könnt ihn also nach belieben auf eure eigene Website stellen und auch verändern, nur der kommerzielle Verkauf des Scripts ist ausgeschlossen. Über einen Link auf <a href="http://www.php-einfach.de" target="_blank">www.php-einfach.de</a> würden wir uns freuen.
+        <p><?php echo _("Welcome to ADarkHeros version of the PHP-einfach loginscript."); ?>
+        </p>
+        <p><a class="btn btn-primary btn-lg" href="register.php" role="button"><?php echo _("Register now"); ?></a>
         
         </p>
-        <p><a class="btn btn-primary btn-lg" href="register.php" role="button">Jetzt registrieren</a></p>
       </div>
     </div>
 
@@ -30,23 +27,22 @@ include("templates/header.inc.php")
         <div class="col-md-4">
           <h2>Features</h2>
           <ul>
-          	<li>Registrierung & Login</li> 
-          	<li>Interner Mitgliederbereich</li>
-          	<li>Neues Zusenden eines Passworts</li>
-          	<li>Programmcode leicht verständlich und erweiterbar</li>
-          	<li>Responsive Webdesign, ideal für PC, Tablet und Smartphone</li>
+          	<li><?php echo _("Registration & login"); ?></li> 
+          	<li><?php echo _("Internal area"); ?></li>
+          	<li><?php echo _("New password per mail"); ?></li>
+          	<li><?php echo _("Easy understandable and expandable"); ?></li>
+          	<li><?php echo _("Responsive webdesign for pc, tablet and smartphone"); ?></li>
           </ul>
          
         </div>
         <div class="col-md-4">
           <h2>Dokumentation</h2>
-          <p>Auf unserer Website erhaltet ihr eine umfangreiche Einführung in das Loginscript. Ziel ist es nicht einfach nur dieses Script zu dokumentieren, sondern euch zu befähigen eigene Login- und Mitgliederscripts zu erstellen. In den verschiedenen Artikeln auf unserer Website erhaltet umfangreiche Informationen dazu. </p>
-          <p><a class="btn btn-default" href="http://www.php-einfach.de/experte/php-codebeispiele/loginscript/" target="_blank" role="button">Weitere Informationen &raquo;</a></p>
+          <p><?php echo _("You can find a documentation and beginner tips on the php-einfach website."); ?></p>
+          <p><a class="btn btn-default" href="http://www.php-einfach.de/experte/php-codebeispiele/loginscript/" target="_blank" role="button"><?php echo _("Further information"); ?> &raquo;</a></p>
        </div>
         <div class="col-md-4">
-          <h2>Webhosting</h2>
-          <p>Möchtet ihr diesen Loginscript für eure Website nutzen, so benötigt ihr PHP fähigen Webspace. Auf unserer Website haben wir die verschiedenen Webhosting-Angebote ausführlich getesten damit ihr den idealen Webspace für eure Website findet.</p>
-          <p><a class="btn btn-default" href="http://www.webhosterwissen.de" target="_blank" role="button">Weitere Informationen &raquo;</a></p>
+          <h2>ADarkHero</h2>
+          <p><?php echo _("You can find my GitHub <a href=\"https://github.com/ADarkHero/loginscript\" target=\"_blank\">here</a>."); ?></p>
         </div>
       </div>
 	</div> <!-- /container -->

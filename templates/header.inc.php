@@ -1,5 +1,29 @@
+<?php
+    error_reporting(-1);
+    if(!function_exists("_")){
+        echo "Gettext is not available! Please change that to enable multiple languages.";
+    }
+
+    $language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);    
+    
+    if($language[0] == "de" || $language[0] == "de_DE"){
+        $language = "de_DE";  
+        $domain = "messages";
+    }
+    else{
+        $language = "en_US";
+        $domain = "none";
+    }
+    
+    putenv("LANG=".$language);
+    setlocale(LC_ALL, $language);
+    bindtextdomain($domain, "Locale");
+    textdomain($domain); 
+    
+?>
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<?php echo $language; ?>">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +49,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-leaf logo"></i> Unternehmenslogo</a>
+          <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-leaf logo"></i> <?php echo _("Company icon"); ?></a>
         </div>
         <?php if(!is_checked_in()): ?>
         <div id="navbar" class="navbar-collapse collapse">
@@ -36,20 +60,20 @@
 						<td>							
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-								<input class="form-control" placeholder="E-Mail" name="emailusername" type="text" required>								
+								<input class="form-control" placeholder="E-Mail/Username" name="emailusername" type="text" required>								
 							</div>
 						</td>
 						<td>
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-								<input class="form-control" placeholder="Passwort" name="passwort" type="password" value="" required>							
+								<input class="form-control" placeholder="<?php echo _("Password"); ?>" name="passwort" type="password" value="" required>							
 							</div>
 						</td>
 						<td><button type="submit" class="btn btn-success">Login</button></td>
 					</tr>
 					<tr>
-						<td><label style="margin-bottom: 0px; font-weight: normal;"><input type="checkbox" name="angemeldet_bleiben" value="remember-me" title="Angemeldet bleiben"  checked="checked" style="margin: 0; vertical-align: middle;" /> <small>Angemeldet bleiben</small></label></td>
-						<td><small><a href="passwortvergessen.php">Passwort vergessen</a></small></td>
+						<td><label style="margin-bottom: 0px; font-weight: normal;"><input type="checkbox" name="angemeldet_bleiben" value="remember-me" title="Angemeldet bleiben"  checked="checked" style="margin: 0; vertical-align: middle;" /> <small><?php echo _("Remember me?"); ?></small></label></td>
+						<td><small><a href="forgotpassword.php"><?php echo _("Forgot password?"); ?></a></small></td>
 						<td></td>
 					</tr>					
 				</tbody>
@@ -61,8 +85,8 @@
         <?php else: ?>
         <div id="navbar" class="navbar-collapse collapse">
          <ul class="nav navbar-nav navbar-right">     
-         	<li><a href="internal.php">Interner Bereich</a></li>       
-            <li><a href="settings.php">Einstellungen</a></li>
+         	<li><a href="internal.php"><?php echo _("Internal"); ?></a></li>       
+            <li><a href="settings.php"><?php echo _("Settings"); ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>   
         </div><!--/.navbar-collapse -->

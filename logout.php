@@ -14,7 +14,7 @@ include("templates/header.inc.php");
 ?>
 
 <div class="container main-container">
-Der Logout war erfolgreich. <a href="login.php">Zurück zum Login</a>.
+<?php echo _("Logout successfull."); ?> <a href="login.php"><?php echo _("Back to login"); ?></a>.
 </div>
 <?php 
 include("templates/footer.inc.php")

@@ -6,59 +6,59 @@ require_once("inc/functions.inc.php");
 include("templates/header.inc.php")
 ?>
 <div class="container main-container registration-form">
-<h1>Registrierung</h1>
+<h1><?php echo _("Register"); ?></h1>
 <?php
-$showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
+$showFormular = true; //Should the form be shown?
  
 if(isset($_GET['register'])) {
 	$error = false;
 	$username = trim($_POST['username']);
 	$email = trim($_POST['email']);
-	$passwort = $_POST['passwort'];
-	$passwort2 = $_POST['passwort2'];
+	$password = $_POST['password'];
+	$password2 = $_POST['password2'];
 	
 	if(empty($username) || empty($email)) {
-		echo 'Bitte alle Felder ausfüllen<br>';
+		echo _("Please fill out every field.").'<br>';
 		$error = true;
 	}
   
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		echo 'Bitte eine gültige E-Mail-Adresse eingeben<br>';
+		echo _("Please input a valid e-mail.").'<br>';
 		$error = true;
 	} 	
-	if(strlen($passwort) == 0) {
-		echo 'Bitte ein Passwort angeben<br>';
+	if(strlen($password) == 0) {
+		echo _("Please input a password.").'<br>';
 		$error = true;
 	}
-	if($passwort != $passwort2) {
-		echo 'Die Passwörter müssen übereinstimmen<br>';
+	if($password != $password2) {
+		echo _("Both passwords must be the same.").'<br>';
 		$error = true;
 	}
 	
-	//Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
+	//Check, if the e-mail was already used
 	if(!$error) { 
 		$statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
 		$result = $statement->execute(array('email' => $email));
 		$user = $statement->fetch();
 		
 		if($user !== false) {
-			echo 'Diese E-Mail-Adresse ist bereits vergeben<br>';
+			echo _("The e-mail was already used.").'<br>';
 			$error = true;
 		}	
 	}
 	
-	//Keine Fehler, wir können den Nutzer registrieren
+	//No errors, user can be registered
 	if(!$error) {	
-		$passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
+		$password_hash = password_hash($password, PASSWORD_DEFAULT);
 		
-		$statement = $pdo->prepare("INSERT INTO users (email, passwort, username) VALUES (:email, :passwort, :username)");
-		$result = $statement->execute(array('email' => $email, 'passwort' => $passwort_hash, 'username' => $username));
+		$statement = $pdo->prepare("INSERT INTO users (email, password, username) VALUES (:email, :password, :username)");
+		$result = $statement->execute(array('email' => $email, 'password' => $password_hash, 'username' => $username));
 		
 		if($result) {		
-			echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
+			echo _("You were successfully registered!").'<a href="login.php">Login</a>';
 			$showFormular = false;
 		} else {
-			echo 'Beim Abspeichern ist leider ein Fehler aufgetreten<br>';
+			echo _("Error while saving your user.").'<br>';
 		}
 	} 
 }
@@ -79,19 +79,19 @@ if($showFormular) {
 </div>
 
 <div class="form-group">
-<label for="inputPasswort">Dein Passwort:</label>
-<input type="password" id="inputPasswort" size="40"  maxlength="250" name="passwort" class="form-control" required>
+<label for="inputPasswort"><?php echo _("Your password:"); ?></label>
+<input type="password" id="inputPasswort" size="40"  maxlength="250" name="password" class="form-control" required>
 </div> 
 
 <div class="form-group">
-<label for="inputPasswort2">Passwort wiederholen:</label>
-<input type="password" id="inputPasswort2" size="40" maxlength="250" name="passwort2" class="form-control" required>
+<label for="inputPasswort2"><?php echo _("Repeat password:"); ?></label>
+<input type="password" id="inputPasswort2" size="40" maxlength="250" name="password2" class="form-control" required>
 </div> 
-<button type="submit" class="btn btn-lg btn-primary btn-block">Registrieren</button>
+<button type="submit" class="btn btn-lg btn-primary btn-block"><?php echo _("Register"); ?></button>
 </form>
  
 <?php
-} //Ende von if($showFormular)
+} //End of if($showFormular)
 	
 
 ?>

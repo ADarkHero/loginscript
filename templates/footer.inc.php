@@ -11,7 +11,8 @@
  <hr>
   <div class="container">
   	<footer>
-        <p>Powered by <a href="http://www.php-einfach.de" target="_blank">PHP-Einfach.de</a></p>
+        <p><?php echo _("Powered by <a href=\"http://www.php-einfach.de\" target=\"_blank\">PHP-Einfach.de</a>"); ?> |
+            <?php echo _("Edited by <a href=\"https://www.adarkhero.de\" target=\"_blank\">ADarkHero</a>"); ?></p>
       </footer>
    </div> 
 

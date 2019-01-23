@@ -12,12 +12,12 @@ if(isset($_POST['emailusername']) && isset($_POST['passwort'])) {
 	$result = $statement->execute(array('emailusername' => $emailusername));
 	$user = $statement->fetch();
 
-	//Überprüfung des Passworts
-	if ($user !== false && password_verify($passwort, $user['passwort'])) {
+	//Check the password
+	if ($user !== false && password_verify($passwort, $user['password'])) {
 		$_SESSION['userid'] = $user['id'];
 
-		//Möchte der Nutzer angemeldet beleiben?
-		if(isset($_POST['angemeldet_bleiben'])) {
+		//Does the user want to remebered?
+		if(isset($_POST['remember_me'])) {
 			$identifier = random_string();
 			$securitytoken = random_string();
 				
@@ -30,7 +30,7 @@ if(isset($_POST['emailusername']) && isset($_POST['passwort'])) {
 		header("location: internal.php");
 		exit;
 	} else {
-		$error_msg =  "E-Mail oder Passwort war ungültig<br><br>";
+		$error_msg =  _("E-mail or password incorrect")."<br><br>";
 	}
 
 }
@@ -56,12 +56,12 @@ if(isset($error_msg) && !empty($error_msg)) {
 	<input type="password" name="passwort" id="inputPassword" class="form-control" placeholder="Passwort" required>
 	<div class="checkbox">
 	  <label>
-		<input type="checkbox" value="remember-me" name="angemeldet_bleiben" value="1" checked> Angemeldet bleiben
+		<input type="checkbox" value="remember-me" name="remember_me" value="1" checked> <?php echo _("Remember me?"); ?>
 	  </label>
 	</div>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 	<br>
-	<a href="passwortvergessen.php">Passwort vergessen</a>
+	<a href="passwortvergessen.php"><?php echo _("Forgot password?"); ?></a>
   </form>
 
 </div> <!-- /container -->
