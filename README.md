@@ -13,3 +13,7 @@ Folgende Änderungen wurden durchgeführt:
 * Log-in with username AND password
 * First and last name were removed. Username was added
 * Glyphicons in Header (user icon and password icon) changed/added
+
+## To-Do
+* English translation of every file
+* English instructions
